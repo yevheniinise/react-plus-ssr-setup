@@ -1,0 +1,38 @@
+{
+  "name": "react-plus-ssr-setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:client": "webpack -p src/client/index.js --config=config/webpack.config.js/client.prod.js",
+    "build:server": "babel src/server -d build/server",
+    "start:client": "node scripts/start.js",
+    "start:server": "nodemon --exec babel-node src/server/index.js",
+    "start": "npm run start:client & npm run start:server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.19.0",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-manifest-plugin": "^2.0.4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "express": "^4.17.0",
+    "express-manifest-helpers": "^0.6.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3"
+  }
+}
