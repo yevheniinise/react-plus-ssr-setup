@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
@@ -6,7 +7,7 @@ const paths = require('../paths');
 module.exports = {
   name: 'client',
   entry: {
-    bundle: `${paths.srcClient}/index.js`
+    bundle: [`${paths.srcClient}/index.js`]
   },
   output: {
     path: path.join(paths.clientBuild, paths.publicPath),
@@ -23,6 +24,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new ManifestPlugin()
+    new ManifestPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

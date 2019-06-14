@@ -24,6 +24,7 @@
     "nodemon": "^1.19.0",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-manifest-plugin": "^2.0.4"
   },
