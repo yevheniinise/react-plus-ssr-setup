@@ -2,10 +2,10 @@
   "name": "react-plus-ssr-setup",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:client": "webpack -p src/client/index.js --config=config/webpack.config.js/client.prod.js",
+    "build:client": "node scripts/build.js",
     "build:server": "babel src/server -d build/server",
     "start:client": "node scripts/start.js",
     "start:server": "nodemon --exec babel-node src/server/index.js",
