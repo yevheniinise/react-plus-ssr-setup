@@ -1,24 +1,27 @@
-import React, {PureComponent} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useDispatch} from "react-redux";
 
-class App extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      counter: 0
-    };
+import {init} from "../shared/store/app";
+
+const App = () => {
+  const [counter, setCount] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(init());
+  });
+
+  function handleClick() {
+    setCount(counter + 1);
   }
 
-  render() {
-    const {counter} = this.state;
-
-    return (
-      <div>
-        <h1>React Plus Server-Side Rendering Setup</h1>
-        <span>Clicked: {counter}</span>
-        <button onClick={() => this.setState({counter: counter + 1})}>Increment</button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>React Plus Server-Side Rendering Setup</h1>
+      <span>Clicked: {counter}</span>
+      <button onClick={handleClick}>Increment</button>
+    </div>
+  );
+};
 
 export default App;
