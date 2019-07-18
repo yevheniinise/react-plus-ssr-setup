@@ -6,10 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "node scripts/build.js",
-    "build:server": "babel src/server -d build/server",
+    "build:server": "babel src -d build --ignore src/client",
     "start:client": "node scripts/start.js",
     "start:server": "nodemon --exec babel-node src/server/index.js",
-    "start": "npm run start:client & npm run start:server"
+    "start": "npm run start:client & npm run start:server",
+    "build": "npm run build:client & npm run build:server"
   },
   "author": "",
   "license": "ISC",
