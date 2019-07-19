@@ -1,0 +1,6 @@
+{
+  "./src/**/*.js": [
+    "eslint --fix --max-warnings 0",
+    "git add"
+  ]
+}

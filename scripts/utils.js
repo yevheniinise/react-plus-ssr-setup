@@ -1,3 +1,15 @@
+const chalk = require('chalk');
+
+const messageTypes = {
+  info: chalk.cyan,
+  error: chalk.bold.red,
+  warning: chalk.keyword('orange')
+};
+
+exports.log = (message, type) => {
+  console.log(messageTypes[type](message));
+};
+
 exports.compilerPromise = (name, compiler) => {
   return new Promise((resolve, reject) => {
     compiler.hooks.compile.tap(name, () => {
