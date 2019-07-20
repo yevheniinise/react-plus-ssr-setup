@@ -5,19 +5,20 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 
+import paths from '../../config/paths';
 import { log } from '../../scripts/utils';
 import { configureStore } from '../shared/store';
-import paths from '../../config/paths';
-import Html from './HTML';
 import App from '../shared/App';
+import Html from './HTML';
 
 const app = express();
 const PORT = process.env.PORT || 5005;
 
-app.use('/static', express.static(path.join(paths.clientBuild, paths.publicPath)));
 app.use('/favicon.ico', (req, res) => {
   res.send('');
 });
+
+app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)));
 
 const manifestPath = path.join(paths.clientBuild, paths.publicPath, 'manifest.json');
 

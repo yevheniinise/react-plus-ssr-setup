@@ -1,8 +1,8 @@
-const webpack = require('webpack');
 const path = require('path');
-const ManifestPlugin = require('webpack-manifest-plugin');
 
 const paths = require('../paths');
+const plugins = require('./plugins');
+const loaders = require('./loaders');
 
 module.exports = {
   name: 'client',
@@ -15,16 +15,10 @@ module.exports = {
     publicPath: paths.publicPath
   },
   module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader'
-      }
-    ]
+    rules: loaders.client
   },
-  plugins: [
-    new ManifestPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  plugins: plugins.client,
+  stats: {
+    colors: true
+  }
 };

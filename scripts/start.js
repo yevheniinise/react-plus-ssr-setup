@@ -1,44 +1,76 @@
-const rimraf = require('rimraf');
 const express = require('express');
+const nodemon = require('nodemon');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
+const rimraf = require('rimraf');
 
-const {compilerPromise} = require('./utils');
+const [clientConfig, serverConfig] = require('../config/webpack.config.js')('development');
 const paths = require('../config/paths');
-const config = require('../config/webpack.config.js')('development');
+const { compilerPromise, log } = require('./utils');
 
 const app = express();
+
 const WEBPACK_PORT = process.env.WEBPACK_PORT || 5006;
 
-rimraf.sync(paths.clientBuild);
-rimraf.sync(paths.serverBuild);
+const start = async () => {
+  rimraf.sync(paths.clientBuild);
+  rimraf.sync(paths.serverBuild);
 
-config.entry.bundle = [
-  `webpack-hot-middleware/client?path=http://localhost:${WEBPACK_PORT}/__webpack_hmr`,
-  ...config.entry.bundle];
+  clientConfig.entry.bundle = [
+    `webpack-hot-middleware/client?path=http://localhost:${WEBPACK_PORT}/__webpack_hmr`,
+    ...clientConfig.entry.bundle
+  ];
 
-config.output.publicPath = [
-  `http://localhost:${WEBPACK_PORT}`,
-  paths.publicPath].join('/').replace(/([^:+])\/+/g, '$1/');
+  const multiCompiler = webpack([clientConfig, serverConfig]);
+  const [clientCompiler, serverCompiler] = multiCompiler.compilers;
 
-const compiler = webpack(config);
-const promise = compilerPromise('Client', compiler);
-promise.catch((error) => console.error(error));
+  const clientPromise = compilerPromise('Client', clientCompiler);
+  const serverPromise = compilerPromise('Server', serverCompiler);
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  return next();
-});
+  app.use(
+    webpackDevMiddleware(clientCompiler, {
+      writeToDisk: true,
+      publicPath: clientConfig.output.publicPath,
+      ignored: /node_modules/
+    })
+  );
 
-app.use(webpackDevMiddleware(compiler, {
-  writeToDisk: true,
-  publicPath: config.output.publicPath,
-  ignored: /node_modules/
-}));
+  app.use(require('webpack-hot-middleware')(clientCompiler));
 
-app.use(webpackHotMiddleware(compiler));
+  app.listen(WEBPACK_PORT);
 
-app.listen(WEBPACK_PORT, () => {
-  console.log(`Client is running: 🌎 http://localhost:${WEBPACK_PORT}`);
-});
+  serverCompiler.watch({ ignored: /node_modules/ }, (error, stats) => {
+    if (!error && !stats.hasErrors()) {
+      console.log(stats.toString(serverConfig.stats));
+      return;
+    }
+  });
+
+  try {
+    await clientPromise;
+    await serverPromise;
+  } catch (error) {
+    log(error, 'error');
+  }
+
+  const script = nodemon({
+    script: `${paths.serverBuild}/server.js`,
+    ignore: ['src', 'scripts', 'config', './*.*', 'build/client']
+  });
+
+  script.on('restart', () => {
+    log('Server side app has been restarted.', 'info');
+  });
+
+  script.on('quit', () => {
+    console.log('Process ended.');
+    process.exit();
+  });
+
+  script.on('error', () => {
+    log('An error occured. Exiting.', 'error');
+    process.exit(1);
+  });
+};
+
+start();
