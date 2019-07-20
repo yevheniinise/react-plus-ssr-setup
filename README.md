@@ -10,7 +10,7 @@ npm start
 ```bash
 npm install
 npm run build
-node build/server/index.js
+node build/server/server.js')
 ```
 
 > Each has its specific environment based optimizations
@@ -22,3 +22,4 @@ node build/server/index.js
 - [x] Add production client build script
 - [ ] Add static typing
 - [ ] Setup Jest
+- [ ] Add wepback loaders with HMR for SCSS, CSS with
