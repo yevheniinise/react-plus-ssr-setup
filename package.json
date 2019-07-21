@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-manifest-helpers": "^0.6.0",
     "react": "^16.8.6",
