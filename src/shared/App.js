@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { init } from '../shared/store/app';
+import './index.scss';
 
 const App = () => {
   const [counter, setCount] = useState(0);

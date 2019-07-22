@@ -1,24 +1,38 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const stylesRegexp = /\.(sc|c)ss$/;
+
 const babelLoader = {
   test: /\.m?js$/,
   exclude: /(node_modules|bower_components)/,
   loader: 'babel-loader'
 };
 
-const cssLoader = {
-  test: /\.css$/,
+const cssLoaderClient = {
+  test: stylesRegexp,
   use: [
-    'style-loader',
-    'css-loader'
+    process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader, // creates style nodes from JS strings
+    'css-loader', // translates CSS into CommonJS
+    'postcss-loader',
+    'sass-loader' // compiles Sass to CSS, using Node Sass by default
   ]
 };
 
+const cssLoaderServer = {
+  test: stylesRegexp,
+  loader: 'css-loader'
+};
+
 const client = [
-  babelLoader,
-  cssLoader
+  {
+    oneOf: [babelLoader, cssLoaderClient]
+  }
 ];
 
 const server = [
-  babelLoader
+  {
+    oneOf: [babelLoader, cssLoaderServer]
+  }
 ];
 
 module.exports = {

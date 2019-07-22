@@ -34,10 +34,13 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
+  // we use style-loader in dev mode instead of MiniCssExtractPlugin.loader, since we do not produce bundle.css
+  const styles = process.env.NODE_ENV === 'production' ? [res.locals.assetPath('bundle.css')] : [];
+
   res.send(
     '<!doctype html>' +
       renderToString(
-        <Html scripts={[res.locals.assetPath('bundle.js')]}>
+        <Html scripts={[res.locals.assetPath('bundle.js')]} styles={styles}>
           <Provider store={req.store}>
             <App />
           </Provider>
