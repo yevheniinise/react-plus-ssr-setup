@@ -1,6 +1,14 @@
 {
-  "./src/**/*.js": [
+  "*.{js,scss,css}": [
+    "prettier --write",
+    "git add"
+  ],
+  "*.js": [
     "eslint --fix --max-warnings 0",
+    "git add"
+  ],
+  "*.{scss,css}": [
+    "stylelint --fix --max-warnings 0",
     "git add"
   ]
 }
