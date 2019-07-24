@@ -20,7 +20,7 @@ module.exports = {
   module: {
     rules: loaders.server
   },
-  plugins: [...plugins.common, ...plugins.server],
+  plugins: plugins.server,
   stats: {
     colors: true
   }

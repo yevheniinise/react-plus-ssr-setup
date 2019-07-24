@@ -1,12 +1,9 @@
-const env = require('../env');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+
+const env = require('../env')();
 const devMode = process.env.NODE_ENV !== 'production';
-
-const common = [
-
-];
 
 const client = [
   new webpack.DefinePlugin(env),
@@ -17,12 +14,9 @@ const client = [
   new ManifestPlugin()
 ];
 
-const server = [
-  new webpack.DefinePlugin(env)
-];
+const server = [new webpack.DefinePlugin(env)];
 
 module.exports = {
-  common,
   client,
   server
 };

@@ -1,8 +1,23 @@
-const { parsed } = require('dotenv').config();
+const fs = require('fs');
+const paths = require('./paths');
 
-const stringifiedEnv = Object.keys(parsed).reduce((env, key) => {
-  env[`process.env.${key}`] = JSON.stringify(parsed[key]);
-  return env;
-}, {});
+const defaultVars = {
+  NODE_ENV: process.env.NODE_ENV || 'development'
+};
 
-module.exports = stringifiedEnv;
+const stringifyEnv = (obj) => ({
+  'process.env': Object.keys(obj).reduce((env, key) => {
+    env[key] = JSON.stringify(obj[key]);
+    return env;
+  }, {})
+});
+
+module.exports = () => {
+  if (fs.existsSync(paths.dotenv)) {
+    const dotenv = require('dotenv').config();
+    const env = { ...dotenv.parsed, ...defaultVars };
+    return stringifyEnv(env);
+  }
+
+  return stringifyEnv(defaultVars);
+};

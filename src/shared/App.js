@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(init());
-  });
+  }, []);
 
   function handleClick() {
     setCount(counter + 1);

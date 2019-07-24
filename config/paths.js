@@ -8,6 +8,7 @@ const paths = {
   serverBuild: resolvePath('build/server'),
   srcClient: resolvePath('src/client'),
   srcServer: resolvePath('src/server'),
+  dotenv: resolvePath('.env'),
   publicPath: '/static/'
 };
 
