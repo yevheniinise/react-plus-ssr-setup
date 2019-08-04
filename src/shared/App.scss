@@ -1,0 +1,22 @@
+@import './styles/variables.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font: normal normal 62.5% $base-font-stack;
+}
+
+body {
+  background: $white;
+  color: $black;
+}
+
+h1 {
+  font-size: $fs-heading1;
+}
+
+a {
+  font-size: $fs-paragraph;
+}

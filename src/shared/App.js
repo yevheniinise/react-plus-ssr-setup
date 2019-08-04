@@ -1,28 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import { init } from '../shared/store/app';
-import './index.scss';
+import Home from './pages/Home';
+import About from './pages/About';
 
-const App = () => {
-  const [counter, setCount] = useState(0);
-  const dispatch = useDispatch();
+import './fonts/fonts.css';
+import './App.scss';
 
-  useEffect(() => {
-    dispatch(init());
-  }, []);
-
-  function handleClick() {
-    setCount(counter + 1);
-  }
-
-  return (
-    <div>
-      <h1>React Plus Server-Side Rendering Setup</h1>
-      <span>Clicked: {counter}</span>
-      <button onClick={handleClick}>Increment</button>
-    </div>
-  );
-};
+const App = () => (
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route exact path="/about" component={About} />
+  </Switch>
+);
 
 export default App;

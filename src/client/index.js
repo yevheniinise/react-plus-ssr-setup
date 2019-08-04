@@ -1,5 +1,6 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { configureStore } from '../shared/store';
@@ -9,7 +10,9 @@ const store = configureStore();
 
 hydrate(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

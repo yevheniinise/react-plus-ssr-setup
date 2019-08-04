@@ -23,15 +23,20 @@ const cssLoaderServer = {
   loader: 'css-loader'
 };
 
+const fontLoader = {
+  test: /\.(woff|woff2|eot)$/,
+  loader: 'file-loader'
+};
+
 const client = [
   {
-    oneOf: [babelLoader, cssLoaderClient]
+    oneOf: [babelLoader, cssLoaderClient, fontLoader]
   }
 ];
 
 const server = [
   {
-    oneOf: [babelLoader, cssLoaderServer]
+    oneOf: [babelLoader, cssLoaderServer, fontLoader]
   }
 ];
 
