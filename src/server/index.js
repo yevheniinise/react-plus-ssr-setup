@@ -13,7 +13,7 @@ import App from '../shared/App';
 import Html from './HTML';
 
 const app = express();
-const PORT = process.env.PORT || 5005;
+const PORT = process.env.PORT || 5000;
 
 app.use('/favicon.ico', (req, res) => {
   res.send('');
@@ -43,7 +43,7 @@ app.get('*', (req, res) => {
       renderToString(
         <Html scripts={[res.locals.assetPath('bundle.js')]} styles={styles}>
           <Provider store={req.store}>
-            <StaticRouter url={req.url} context={{}}>
+            <StaticRouter location={req.url} context={{}}>
               <App />
             </StaticRouter>
           </Provider>

@@ -10,7 +10,7 @@ const { compilerPromise, log } = require('./utils');
 
 const app = express();
 
-const WEBPACK_PORT = process.env.WEBPACK_PORT || 5006;
+const WEBPACK_PORT = process.env.WEBPACK_PORT || 5001;
 
 const start = async () => {
   rimraf.sync(paths.clientBuild);
