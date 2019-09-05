@@ -36,4 +36,4 @@ node build/server/server.js
 - [ ] Setup Jest
 - [x] Add wepback loaders with HMR for SCSS, CSS with
 - [ ] Customize webpack compile logs
-- [ ] Add React-Helmet
+- [x] Add React-Helmet

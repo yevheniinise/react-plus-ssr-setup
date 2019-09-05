@@ -5,6 +5,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { HelmetProvider } from 'react-helmet-async';
 
 import paths from '../../config/paths';
 import { log } from '../../scripts/utils';
@@ -37,16 +38,24 @@ app.use((req, res, next) => {
 app.get('*', (req, res) => {
   // we use style-loader in dev mode instead of MiniCssExtractPlugin.loader, since we do not produce bundle.css
   const styles = process.env.NODE_ENV === 'production' ? [res.locals.assetPath('bundle.css')] : [];
+  const helmetContext = {};
+
+  const content = renderToString(
+    <Provider store={req.store}>
+      <StaticRouter location={req.url} context={{}}>
+        <HelmetProvider context={helmetContext}>
+          <App />
+        </HelmetProvider>
+      </StaticRouter>
+    </Provider>
+  );
+  const { helmet } = helmetContext;
 
   res.send(
     '<!doctype html>' +
       renderToString(
-        <Html scripts={[res.locals.assetPath('bundle.js')]} styles={styles}>
-          <Provider store={req.store}>
-            <StaticRouter location={req.url} context={{}}>
-              <App />
-            </StaticRouter>
-          </Provider>
+        <Html scripts={[res.locals.assetPath('bundle.js')]} styles={styles} helmetContext={helmet}>
+          {content}
         </Html>
       )
   );

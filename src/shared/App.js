@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -8,10 +9,13 @@ import './fonts/fonts.css';
 import './App.scss';
 
 const App = () => (
-  <Switch>
+  <div>
+    <Helmet>
+      <title>React Plus SSR Setup</title>
+    </Helmet>
     <Route exact path="/" component={Home} />
     <Route exact path="/about" component={About} />
-  </Switch>
+  </div>
 );
 
 export default App;

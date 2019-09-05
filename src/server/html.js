@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Html = ({ children, scripts, styles }) => {
+const Html = ({ children, scripts, styles, helmetContext }) => {
   return (
     <html lang="en">
       <head>
@@ -13,10 +13,11 @@ const Html = ({ children, scripts, styles }) => {
         {styles.map((href) => {
           return <link key={href} rel="stylesheet" type="text/css" href={href} />;
         })}
-        <title>React Plus SSR setup</title>
+        {helmetContext.meta.toComponent()}
+        {helmetContext.title.toComponent()}
       </head>
       <body>
-        <div id="root">{children}</div>
+        <div id="root" dangerouslySetInnerHTML={{ __html: children }} />
         {scripts.map((src) => {
           return <script key={src} src={src} />;
         })}
