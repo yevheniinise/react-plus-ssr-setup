@@ -3,7 +3,7 @@
     "stylelint-order"
   ],
   "extends": [
-    "stylelint-config-recommended-scss",
+    "stylelint-config-recommended",
     "stylelint-prettier/recommended"
   ],
   "rules": {

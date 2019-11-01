@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #fafafa;
+  font-family: 'Lora Regular', Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+}

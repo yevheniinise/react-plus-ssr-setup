@@ -1,5 +1,5 @@
 {
-  "*.{js,scss,css}": [
+  "*.{js,css}": [
     "prettier --write",
     "git add"
   ],
@@ -7,7 +7,7 @@
     "eslint --fix --max-warnings 0",
     "git add"
   ],
-  "*.{scss,css}": [
+  "*.css": [
     "stylelint --fix --max-warnings 0",
     "git add"
   ]

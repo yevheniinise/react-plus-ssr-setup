@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 
 import './fonts/fonts.css';
-import './App.scss';
+import './App.css';
 
 const App = () => (
   <div>

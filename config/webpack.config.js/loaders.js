@@ -13,8 +13,7 @@ const cssLoaderClient = {
   use: [
     process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader, // creates style nodes from JS strings
     'css-loader', // translates CSS into CommonJS
-    'postcss-loader',
-    'sass-loader' // compiles Sass to CSS, using Node Sass by default
+    'postcss-loader'
   ]
 };
 
