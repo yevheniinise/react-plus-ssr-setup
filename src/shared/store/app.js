@@ -1,20 +1,20 @@
-const INIT = 'react-plus-ssr-setup/app/INIT';
+const INIT = 'react-plus-ssr-setup/app/INIT'
 
 const initialState = {
-  initialized: false
-};
+  initialized: false,
+}
 
 export default function app(state = initialState, action) {
   switch (action.type) {
     case INIT:
       return {
-        initialized: true
-      };
+        initialized: true,
+      }
     default:
-      return state;
+      return state
   }
 }
 
 export const init = () => ({
-  type: INIT
-});
+  type: INIT,
+})

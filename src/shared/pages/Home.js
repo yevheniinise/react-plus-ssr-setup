@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react'
 
-import Header from '../components/Header';
+import Header from '../components/Header'
 
 const Home = () => {
   return (
@@ -8,7 +8,7 @@ const Home = () => {
       <Header />
       <h1>Home page</h1>
     </Fragment>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

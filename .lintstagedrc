@@ -4,11 +4,11 @@
     "git add"
   ],
   "*.js": [
-    "eslint --fix --max-warnings 0",
+    "eslint --fix",
     "git add"
   ],
   "*.css": [
-    "stylelint --fix --max-warnings 0",
+    "stylelint --fix",
     "git add"
   ]
 }

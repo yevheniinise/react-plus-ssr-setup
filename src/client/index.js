@@ -1,13 +1,13 @@
-import React from 'react';
-import { hydrate } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { HelmetProvider } from 'react-helmet-async';
+import React from 'react'
+import {hydrate} from 'react-dom'
+import {BrowserRouter} from 'react-router-dom'
+import {Provider} from 'react-redux'
+import {HelmetProvider} from 'react-helmet-async'
 
-import { configureStore } from '../shared/store';
-import App from '../shared/App';
+import {configureStore} from '../shared/store'
+import App from '../shared/App'
 
-const store = configureStore();
+const store = configureStore()
 
 hydrate(
   <Provider store={store}>
@@ -17,11 +17,11 @@ hydrate(
       </HelmetProvider>
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root')
-);
+  document.getElementById('root'),
+)
 
 if (process.env.NODE_ENV === 'development') {
   if (module.hot) {
-    module.hot.accept();
+    module.hot.accept()
   }
 }

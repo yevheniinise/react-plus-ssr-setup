@@ -2,28 +2,29 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true
+    node: true,
   },
   extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
-    'no-console': 'off'
+    'no-console': 'off',
+    semi: 'off',
   },
   settings: {
     react: {
-      version: 'detect'
-    }
-  }
-};
+      version: 'detect',
+    },
+  },
+}

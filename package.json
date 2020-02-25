@@ -8,8 +8,7 @@
     "start": "cross-env NODE_ENV=development node scripts/start.js",
     "build": "cross-env NODE_ENV=production node scripts/build.js",
     "lint": "eslint 'src/**/*.js'",
-    "stylelint": "stylelint 'src/**/*.css'",
-    "prettify": "prettier --write 'src/**/*.{js,css}'"
+    "stylelint": "stylelint 'src/**/*.css'"
   },
   "author": "",
   "license": "ISC",
