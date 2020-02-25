@@ -1,7 +1,7 @@
-const path = require('path');
+const path = require('path')
 
-const appDirectory = process.cwd();
-const resolvePath = (relativePath) => path.resolve(appDirectory, relativePath);
+const appDirectory = process.cwd()
+const resolvePath = relativePath => path.resolve(appDirectory, relativePath)
 
 const paths = {
   clientBuild: resolvePath('build/client'),
@@ -9,7 +9,7 @@ const paths = {
   srcClient: resolvePath('src/client'),
   srcServer: resolvePath('src/server'),
   dotenv: resolvePath('.env'),
-  publicPath: '/static/'
-};
+  publicPath: '/static/',
+}
 
-module.exports = paths;
+module.exports = paths
